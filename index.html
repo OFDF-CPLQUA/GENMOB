@@ -24,28 +24,8 @@
 }">
 
 <!-- ── APPLE TOUCH ICON (inline SVG → PNG via canvas) ── -->
-<script>
-(function(){
-  const s=document.createElement('canvas');s.width=180;s.height=180;
-  const x=s.getContext('2d');
-  x.fillStyle='#0d1117';x.fillRect(0,0,180,180);
-  x.strokeStyle='#f0b429';x.lineWidth=2.5;x.lineCap='round';
-  // cercle
-  x.beginPath();x.arc(90,90,35,Math.PI,0,false);x.stroke();
-  x.beginPath();x.arc(90,90,35,0,Math.PI,false);x.stroke();
-  // rayon gauche
-  x.beginPath();x.moveTo(90,90);x.lineTo(30,90);x.stroke();
-  // arcs droite
-  x.beginPath();x.moveTo(90,90);x.bezierCurveTo(110,30,160,90,90,90);x.stroke();
-  x.beginPath();x.moveTo(90,90);x.bezierCurveTo(110,30,160,90,90,90);
-  x.bezierCurveTo(160,90,110,150,90,90);x.stroke();
-  // point central
-  x.fillStyle='#f0b429';x.beginPath();x.arc(90,90,8,0,Math.PI*2);x.fill();
-  const l=document.createElement('link');
-  l.rel='apple-touch-icon';l.href=s.toDataURL();
-  document.head.appendChild(l);
-})();
-</script><link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KICA8cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgZmlsbD0iIzBkMTExNyIgcng9IjgwIi8+CiAgPCEtLSBDZXJjbGVzIGNvbmNlbnRyaXF1ZXMgZ2F1Y2hlIC0tPgogIDxwYXRoIGQ9Ik0yNTYgMTcyIEE4NCA4NCAwIDAgMCAyNTYgMzQwIiBmaWxsPSJub25lIiBzdHJva2U9IiNmMGI0MjkiIHN0cm9rZS13aWR0aD0iNSIgb3BhY2l0eT0iMC41Ii8+CiAgPHBhdGggZD0iTTI1NiAxMjggQTEyOCAxMjggMCAwIDAgMjU2IDM4NCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZjBiNDI5IiBzdHJva2Utd2lkdGg9IjQiIG9wYWNpdHk9IjAuMyIvPgogIDwhLS0gUmF5b24gdmVydGljYWwgaGF1dCAtLT4KICA8bGluZSB4MT0iMjU2IiB5MT0iMjU2IiB4Mj0iMjU2IiB5Mj0iMTAwIiBzdHJva2U9IiNmMGI0MjkiIHN0cm9rZS13aWR0aD0iNyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPCEtLSBSYXlvbiB2ZXJ0aWNhbCBiYXMgLS0+CiAgPGxpbmUgeDE9IjI1NiIgeTE9IjI1NiIgeDI9IjI1NiIgeTI9IjQxMiIgc3Ryb2tlPSIjZjBiNDI5IiBzdHJva2Utd2lkdGg9IjciIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDwhLS0gUmF5b25zIGdhdWNoZSAtLT4KICA8bGluZSB4MT0iMjU2IiB5MT0iMjU2IiB4Mj0iODAiICB5Mj0iMjU2IiBzdHJva2U9IiNmMGI0MjkiIHN0cm9rZS13aWR0aD0iNyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPGxpbmUgeDE9IjI1NiIgeTE9IjI1NiIgeDI9IjEyMCIgeTI9IjE1MCIgc3Ryb2tlPSIjZjBiNDI5IiBzdHJva2Utd2lkdGg9IjUuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPGxpbmUgeDE9IjI1NiIgeTE9IjI1NiIgeDI9IjEyMCIgeTI9IjM2MiIgc3Ryb2tlPSIjZjBiNDI5IiBzdHJva2Utd2lkdGg9IjUuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPGxpbmUgeDE9IjI1NiIgeTE9IjI1NiIgeDI9IjE0OCIgeTI9IjExMCIgc3Ryb2tlPSIjZjBiNDI5IiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgb3BhY2l0eT0iMC42Ii8+CiAgPGxpbmUgeDE9IjI1NiIgeTE9IjI1NiIgeDI9IjE0OCIgeTI9IjQwMiIgc3Ryb2tlPSIjZjBiNDI5IiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgb3BhY2l0eT0iMC42Ii8+CiAgPCEtLSBBcmNzIGRyb2l0ZSAtLT4KICA8cGF0aCBkPSJNMjU2IDI1NiBRMzAwIDgwIDQ1MCAyNTYgUTMwMCA0MzIgMjU2IDI1NiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZjBiNDI5IiBzdHJva2Utd2lkdGg9IjciIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik0yNTYgMjU2IFEyOTAgMTIwIDQwMCAyNTYgUTI5MCAzOTIgMjU2IDI1NiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZjBiNDI5IiBzdHJva2Utd2lkdGg9IjUuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBvcGFjaXR5PSIwLjciLz4KICA8cGF0aCBkPSJNMjU2IDI1NiBRMjc2IDE2NSAzNTYgMjU2IFEyNzYgMzQ3IDI1NiAyNTYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2YwYjQyOSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9IjAuNSIvPgogIDwhLS0gUG9pbnRzIGdhdWNoZSAtLT4KICA8Y2lyY2xlIGN4PSI4MCIgIGN5PSIyNTYiIHI9IjEyIiBmaWxsPSIjMGQxMTE3IiBzdHJva2U9IiNmMGI0MjkiIHN0cm9rZS13aWR0aD0iNSIvPgogIDxjaXJjbGUgY3g9IjEyMCIgY3k9IjE1MCIgcj0iMTAiIGZpbGw9IiMwZDExMTciIHN0cm9rZT0iI2YwYjQyOSIgc3Ryb2tlLXdpZHRoPSI0LjUiLz4KICA8Y2lyY2xlIGN4PSIxMjAiIGN5PSIzNjIiIHI9IjEwIiBmaWxsPSIjMGQxMTE3IiBzdHJva2U9IiNmMGI0MjkiIHN0cm9rZS13aWR0aD0iNC41Ii8+CiAgPGNpcmNsZSBjeD0iMTQ4IiBjeT0iMTEwIiByPSI4IiAgZmlsbD0iIzBkMTExNyIgc3Ryb2tlPSIjZjBiNDI5IiBzdHJva2Utd2lkdGg9IjQiIG9wYWNpdHk9IjAuOCIvPgogIDxjaXJjbGUgY3g9IjE0OCIgY3k9IjQwMiIgcj0iOCIgIGZpbGw9IiMwZDExMTciIHN0cm9rZT0iI2YwYjQyOSIgc3Ryb2tlLXdpZHRoPSI0IiBvcGFjaXR5PSIwLjgiLz4KICA8IS0tIFBvaW50cyBkcm9pdGUgLS0+CiAgPGNpcmNsZSBjeD0iNDUwIiBjeT0iMjU2IiByPSIxMiIgZmlsbD0iIzBkMTExNyIgc3Ryb2tlPSIjZjBiNDI5IiBzdHJva2Utd2lkdGg9IjUiLz4KICA8Y2lyY2xlIGN4PSI0MDAiIGN5PSIyNTYiIHI9IjEwIiBmaWxsPSIjMGQxMTE3IiBzdHJva2U9IiNmMGI0MjkiIHN0cm9rZS13aWR0aD0iNC41Ii8+CiAgPGNpcmNsZSBjeD0iMzU2IiBjeT0iMjU2IiByPSI4IiAgZmlsbD0iIzBkMTExNyIgc3Ryb2tlPSIjZjBiNDI5IiBzdHJva2Utd2lkdGg9IjQiLz4KICA8IS0tIFBvaW50IGNlbnRyYWwgLS0+CiAgPGNpcmNsZSBjeD0iMjU2IiBjeT0iMjU2IiByPSIzMiIgZmlsbD0iIzBkMTExNyIgc3Ryb2tlPSIjZjBiNDI5IiBzdHJva2Utd2lkdGg9IjMiLz4KICA8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyNTYiIHI9IjE2IiBmaWxsPSIjZjBiNDI5Ii8+Cjwvc3ZnPg==">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj4KICA8cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgZmlsbD0iIzBkMTExNyIgcng9IjgwIi8+CiAgPCEtLSBDZXJjbGVzIGNvbmNlbnRyaXF1ZXMgZ2F1Y2hlIC0tPgogIDxwYXRoIGQ9Ik0yNTYgMTcyIEE4NCA4NCAwIDAgMCAyNTYgMzQwIiBmaWxsPSJub25lIiBzdHJva2U9IiNmMGI0MjkiIHN0cm9rZS13aWR0aD0iNSIgb3BhY2l0eT0iMC41Ii8+CiAgPHBhdGggZD0iTTI1NiAxMjggQTEyOCAxMjggMCAwIDAgMjU2IDM4NCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZjBiNDI5IiBzdHJva2Utd2lkdGg9IjQiIG9wYWNpdHk9IjAuMyIvPgogIDwhLS0gUmF5b24gdmVydGljYWwgaGF1dCAtLT4KICA8bGluZSB4MT0iMjU2IiB5MT0iMjU2IiB4Mj0iMjU2IiB5Mj0iMTAwIiBzdHJva2U9IiNmMGI0MjkiIHN0cm9rZS13aWR0aD0iNyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPCEtLSBSYXlvbiB2ZXJ0aWNhbCBiYXMgLS0+CiAgPGxpbmUgeDE9IjI1NiIgeTE9IjI1NiIgeDI9IjI1NiIgeTI9IjQxMiIgc3Ryb2tlPSIjZjBiNDI5IiBzdHJva2Utd2lkdGg9IjciIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDwhLS0gUmF5b25zIGdhdWNoZSAtLT4KICA8bGluZSB4MT0iMjU2IiB5MT0iMjU2IiB4Mj0iODAiICB5Mj0iMjU2IiBzdHJva2U9IiNmMGI0MjkiIHN0cm9rZS13aWR0aD0iNyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPGxpbmUgeDE9IjI1NiIgeTE9IjI1NiIgeDI9IjEyMCIgeTI9IjE1MCIgc3Ryb2tlPSIjZjBiNDI5IiBzdHJva2Utd2lkdGg9IjUuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPGxpbmUgeDE9IjI1NiIgeTE9IjI1NiIgeDI9IjEyMCIgeTI9IjM2MiIgc3Ryb2tlPSIjZjBiNDI5IiBzdHJva2Utd2lkdGg9IjUuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPGxpbmUgeDE9IjI1NiIgeTE9IjI1NiIgeDI9IjE0OCIgeTI9IjExMCIgc3Ryb2tlPSIjZjBiNDI5IiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgb3BhY2l0eT0iMC42Ii8+CiAgPGxpbmUgeDE9IjI1NiIgeTE9IjI1NiIgeDI9IjE0OCIgeTI9IjQwMiIgc3Ryb2tlPSIjZjBiNDI5IiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgb3BhY2l0eT0iMC42Ii8+CiAgPCEtLSBBcmNzIGRyb2l0ZSAtLT4KICA8cGF0aCBkPSJNMjU2IDI1NiBRMzAwIDgwIDQ1MCAyNTYgUTMwMCA0MzIgMjU2IDI1NiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZjBiNDI5IiBzdHJva2Utd2lkdGg9IjciIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik0yNTYgMjU2IFEyOTAgMTIwIDQwMCAyNTYgUTI5MCAzOTIgMjU2IDI1NiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZjBiNDI5IiBzdHJva2Utd2lkdGg9IjUuNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBvcGFjaXR5PSIwLjciLz4KICA8cGF0aCBkPSJNMjU2IDI1NiBRMjc2IDE2NSAzNTYgMjU2IFEyNzYgMzQ3IDI1NiAyNTYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2YwYjQyOSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9IjAuNSIvPgogIDwhLS0gUG9pbnRzIGdhdWNoZSAtLT4KICA8Y2lyY2xlIGN4PSI4MCIgIGN5PSIyNTYiIHI9IjEyIiBmaWxsPSIjMGQxMTE3IiBzdHJva2U9IiNmMGI0MjkiIHN0cm9rZS13aWR0aD0iNSIvPgogIDxjaXJjbGUgY3g9IjEyMCIgY3k9IjE1MCIgcj0iMTAiIGZpbGw9IiMwZDExMTciIHN0cm9rZT0iI2YwYjQyOSIgc3Ryb2tlLXdpZHRoPSI0LjUiLz4KICA8Y2lyY2xlIGN4PSIxMjAiIGN5PSIzNjIiIHI9IjEwIiBmaWxsPSIjMGQxMTE3IiBzdHJva2U9IiNmMGI0MjkiIHN0cm9rZS13aWR0aD0iNC41Ii8+CiAgPGNpcmNsZSBjeD0iMTQ4IiBjeT0iMTEwIiByPSI4IiAgZmlsbD0iIzBkMTExNyIgc3Ryb2tlPSIjZjBiNDI5IiBzdHJva2Utd2lkdGg9IjQiIG9wYWNpdHk9IjAuOCIvPgogIDxjaXJjbGUgY3g9IjE0OCIgY3k9IjQwMiIgcj0iOCIgIGZpbGw9IiMwZDExMTciIHN0cm9rZT0iI2YwYjQyOSIgc3Ryb2tlLXdpZHRoPSI0IiBvcGFjaXR5PSIwLjgiLz4KICA8IS0tIFBvaW50cyBkcm9pdGUgLS0+CiAgPGNpcmNsZSBjeD0iNDUwIiBjeT0iMjU2IiByPSIxMiIgZmlsbD0iIzBkMTExNyIgc3Ryb2tlPSIjZjBiNDI5IiBzdHJva2Utd2lkdGg9IjUiLz4KICA8Y2lyY2xlIGN4PSI0MDAiIGN5PSIyNTYiIHI9IjEwIiBmaWxsPSIjMGQxMTE3IiBzdHJva2U9IiNmMGI0MjkiIHN0cm9rZS13aWR0aD0iNC41Ii8+CiAgPGNpcmNsZSBjeD0iMzU2IiBjeT0iMjU2IiByPSI4IiAgZmlsbD0iIzBkMTExNyIgc3Ryb2tlPSIjZjBiNDI5IiBzdHJva2Utd2lkdGg9IjQiLz4KICA8IS0tIFBvaW50IGNlbnRyYWwgLS0+CiAgPGNpcmNsZSBjeD0iMjU2IiBjeT0iMjU2IiByPSIzMiIgZmlsbD0iIzBkMTExNyIgc3Ryb2tlPSIjZjBiNDI5IiBzdHJva2Utd2lkdGg9IjMiLz4KICA8Y2lyY2xlIGN4PSIyNTYiIGN5PSIyNTYiIHI9IjE2IiBmaWxsPSIjZjBiNDI5Ii8+Cjwvc3ZnPg==">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&amp;family=IBM+Plex+Sans:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
 <style>
 :root {
@@ -273,7 +253,36 @@ main { flex: 1; overflow-y: auto; padding: 28px 32px; }
 .sr-label { font-size: 13px; }
 mark { background: rgba(240,180,41,.3); border-radius: 2px; padding: 0 2px; color: inherit; }
 
-/* ======================== PASSWORD MODAL ======================== */
+/* ── APP LOGIN ── */
+.app-login {
+  position: fixed; inset: 0; background: var(--bg);
+  z-index: 500; display: flex; align-items: center; justify-content: center;
+}
+.app-login-box {
+  display: flex; flex-direction: column; align-items: center; gap: 20px;
+  width: min(320px, 90vw); padding: 40px 28px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+}
+.app-login-title { font-family: var(--mono); font-size: 22px; font-weight: 700; color: var(--accent); letter-spacing: 4px; }
+.app-login-sub { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 3px; margin-top: -12px; }
+/* Pavé numérique 6 chiffres */
+.pin-dots { display: flex; gap: 12px; justify-content: center; }
+.pin-dot {
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 2px solid var(--border); background: transparent; transition: all .15s;
+}
+.pin-dot.filled { background: var(--accent); border-color: var(--accent); }
+.pin-dot.error  { background: var(--danger); border-color: var(--danger); }
+.numpad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 220px; }
+.numpad-btn {
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+  color: var(--text); font-family: var(--mono); font-size: 20px; font-weight: 600;
+  padding: 14px; cursor: pointer; transition: all .12s; text-align: center;
+}
+.numpad-btn:hover { background: var(--border); }
+.numpad-btn:active { transform: scale(.94); }
+.numpad-btn.del { font-size: 16px; color: var(--muted); }
+.pin-error { font-family: var(--mono); font-size: 11px; color: var(--danger); min-height: 16px; letter-spacing: 1px; }
 .pwd-overlay {
   display: none; position: fixed; inset: 0; background: rgba(0,0,0,.75);
   z-index: 400; align-items: center; justify-content: center;
@@ -414,18 +423,66 @@ mark { background: rgba(240,180,41,.3); border-radius: 2px; padding: 0 2px; colo
   <main id="main"></main>
 </div>
 
-<!-- PASSWORD MODAL -->
-<div class="pwd-overlay" id="pwdOverlay">
-  <div class="pwd-box">
-    <div class="pwd-title">🔒 ACCÈS ÉDITEUR</div>
-    <div class="pwd-subtitle">Entrez le mot de passe pour accéder au mode édition.</div>
-    <div class="pwd-input-wrap">
-      <input type="password" id="pwdInput" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkPassword()">
-      <button class="pwd-toggle" onclick="togglePwdVisibility()" id="pwdToggle">👁</button>
+<!-- ── APP LOGIN SCREEN ── -->
+<div class="app-login" id="appLogin" style="display: flex;">
+  <div class="app-login-box">
+    <div class="app-login-title">GENMOB</div>
+    <div class="app-login-sub">GENESIS MOBILE</div>
+    <div class="pin-dots" id="pinDots">
+      <div class="pin-dot filled" id="pd0"></div>
+      <div class="pin-dot filled" id="pd1"></div>
+      <div class="pin-dot filled" id="pd2"></div>
+      <div class="pin-dot filled" id="pd3"></div>
+      <div class="pin-dot filled" id="pd4"></div>
+      <div class="pin-dot filled" id="pd5"></div>
     </div>
-    <div class="pwd-error" id="pwdError"></div>
-    <button class="pwd-btn" onclick="checkPassword()">Déverrouiller</button>
-    <button class="pwd-cancel" onclick="closePwdModal()">Annuler</button>
+    <div class="pin-error" id="pinError"></div>
+    <div class="numpad">
+      <button class="numpad-btn" onclick="pinPress('1')">1</button>
+      <button class="numpad-btn" onclick="pinPress('2')">2</button>
+      <button class="numpad-btn" onclick="pinPress('3')">3</button>
+      <button class="numpad-btn" onclick="pinPress('4')">4</button>
+      <button class="numpad-btn" onclick="pinPress('5')">5</button>
+      <button class="numpad-btn" onclick="pinPress('6')">6</button>
+      <button class="numpad-btn" onclick="pinPress('7')">7</button>
+      <button class="numpad-btn" onclick="pinPress('8')">8</button>
+      <button class="numpad-btn" onclick="pinPress('9')">9</button>
+      <button class="numpad-btn" style="visibility:hidden;"></button>
+      <button class="numpad-btn" onclick="pinPress('0')">0</button>
+      <button class="numpad-btn del" onclick="pinDel()">⌫</button>
+    </div>
+  </div>
+</div>
+
+<!-- PASSWORD MODAL (éditeur) — digicode 6 chiffres -->
+<div class="pwd-overlay" id="pwdOverlay">
+  <div class="app-login-box">
+    <div class="app-login-title">ÉDITEUR</div>
+    <div class="app-login-sub">CODE D'ACCÈS</div>
+    <div class="pin-dots" id="edPinDots">
+      <div class="pin-dot" id="epd0"></div>
+      <div class="pin-dot" id="epd1"></div>
+      <div class="pin-dot" id="epd2"></div>
+      <div class="pin-dot" id="epd3"></div>
+      <div class="pin-dot" id="epd4"></div>
+      <div class="pin-dot" id="epd5"></div>
+    </div>
+    <div class="pin-error" id="edPinError"></div>
+    <div class="numpad">
+      <button class="numpad-btn" onclick="edPinPress('1')">1</button>
+      <button class="numpad-btn" onclick="edPinPress('2')">2</button>
+      <button class="numpad-btn" onclick="edPinPress('3')">3</button>
+      <button class="numpad-btn" onclick="edPinPress('4')">4</button>
+      <button class="numpad-btn" onclick="edPinPress('5')">5</button>
+      <button class="numpad-btn" onclick="edPinPress('6')">6</button>
+      <button class="numpad-btn" onclick="edPinPress('7')">7</button>
+      <button class="numpad-btn" onclick="edPinPress('8')">8</button>
+      <button class="numpad-btn" onclick="edPinPress('9')">9</button>
+      <button class="numpad-btn" style="visibility:hidden;"></button>
+      <button class="numpad-btn" onclick="edPinPress('0')">0</button>
+      <button class="numpad-btn del" onclick="edPinDel()">⌫</button>
+    </div>
+    <button class="pwd-cancel" onclick="closePwdModal()" style="margin-top:4px;">Annuler</button>
   </div>
 </div>
 
@@ -456,15 +513,32 @@ mark { background: rgba(240,180,41,.3); border-radius: 2px; padding: 0 2px; colo
     </div>
 
     <!-- Change password sub-panel -->
-    <div id="changePwdPanel" style="display:none; padding:16px 20px; border-top:1px solid var(--border); background:var(--bg); border-radius:0 0 12px 12px;">
-      <div class="pwd-change-title">Changer le mot de passe</div>
-      <div style="display:flex;flex-direction:column;gap:8px;max-width:400px;">
-        <input type="password" id="newPwd1" placeholder="Nouveau mot de passe" style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:var(--mono);font-size:13px;padding:8px 12px;outline:none;">
-        <input type="password" id="newPwd2" placeholder="Confirmer le mot de passe" style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:var(--mono);font-size:13px;padding:8px 12px;outline:none;">
-        <div id="changePwdMsg" style="font-size:12px;font-family:var(--mono);min-height:16px;"></div>
-        <div style="display:flex;gap:8px;">
-          <button onclick="confirmChangePwd()" style="background:var(--accent);border:none;border-radius:6px;color:#000;font-weight:700;font-size:12px;padding:8px 16px;cursor:pointer;">Confirmer</button>
-          <button onclick="hideChangePwd()" style="background:none;border:1px solid var(--border);border-radius:6px;color:var(--muted);font-size:12px;padding:8px 16px;cursor:pointer;">Annuler</button>
+    <div id="changePwdPanel" style="display: none; padding: 16px 20px; border-top: 1px solid var(--border); background: var(--bg); border-radius: 0px 0px 12px 12px;">
+      <div style="display:flex;gap:24px;flex-wrap:wrap;">
+        <!-- Code éditeur -->
+        <div style="flex:1;min-width:180px;">
+          <div class="pwd-change-title">Code éditeur (6 chiffres)</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <input type="number" id="newPwd1" placeholder="Nouveau code (6 chiffres)" maxlength="6" style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:var(--mono);font-size:16px;padding:8px 12px;outline:none;letter-spacing:6px;">
+            <input type="number" id="newPwd2" placeholder="Confirmer le code" style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:var(--mono);font-size:16px;padding:8px 12px;outline:none;letter-spacing:6px;">
+            <div id="changePwdMsg" style="font-size: 12px; font-family: var(--mono); min-height: 16px; color: var(--success);"></div>
+            <div style="display:flex;gap:8px;">
+              <button onclick="confirmChangePwd()" style="background:var(--accent);border:none;border-radius:6px;color:#000;font-weight:700;font-size:12px;padding:8px 16px;cursor:pointer;">Confirmer</button>
+              <button onclick="hideChangePwd()" style="background:none;border:1px solid var(--border);border-radius:6px;color:var(--muted);font-size:12px;padding:8px 16px;cursor:pointer;">Annuler</button>
+            </div>
+          </div>
+        </div>
+        <!-- Code accès app -->
+        <div style="flex:1;min-width:180px;">
+          <div class="pwd-change-title">Code accès app (6 chiffres)</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <input type="number" id="newPin1" placeholder="Nouveau code (6 chiffres)" maxlength="6" style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:var(--mono);font-size:16px;padding:8px 12px;outline:none;letter-spacing:6px;">
+            <input type="number" id="newPin2" placeholder="Confirmer le code" style="background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:var(--mono);font-size:16px;padding:8px 12px;outline:none;letter-spacing:6px;">
+            <div id="changePinMsg" style="font-size: 12px; font-family: var(--mono); min-height: 16px; color: var(--success);"></div>
+            <div style="display:flex;gap:8px;">
+              <button onclick="confirmChangePin()" style="background:var(--accent);border:none;border-radius:6px;color:#000;font-weight:700;font-size:12px;padding:8px 16px;cursor:pointer;">Confirmer</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -842,8 +916,54 @@ function closeMenu() {
 }
 
 // ================================================================
-// PASSWORD
+// APP LOGIN — code PIN 6 chiffres
 // ================================================================
+const DEFAULT_APP_PIN = '123456';
+let pinBuffer = '';
+
+function getAppPin() { return localStorage.getItem('genmob_app_pin') || DEFAULT_APP_PIN; }
+
+function pinPress(d) {
+  if (pinBuffer.length >= 6) return;
+  pinBuffer += d;
+  updatePinDots();
+  if (pinBuffer.length === 6) setTimeout(checkPin, 120);
+}
+
+function pinDel() {
+  pinBuffer = pinBuffer.slice(0, -1);
+  updatePinDots();
+  document.getElementById('pinError').textContent = '';
+}
+
+function updatePinDots() {
+  for (let i = 0; i < 6; i++) {
+    const dot = document.getElementById('pd' + i);
+    dot.classList.toggle('filled', i < pinBuffer.length);
+    dot.classList.remove('error');
+  }
+}
+
+function checkPin() {
+  if (pinBuffer === getAppPin()) {
+    document.getElementById('appLogin').style.display = 'none';
+  } else {
+    // Erreur — flasher en rouge
+    for (let i = 0; i < 6; i++) {
+      const dot = document.getElementById('pd' + i);
+      dot.classList.remove('filled');
+      dot.classList.add('error');
+    }
+    document.getElementById('pinError').textContent = 'Code incorrect';
+    setTimeout(() => {
+      pinBuffer = '';
+      updatePinDots();
+      document.getElementById('pinError').textContent = '';
+    }, 900);
+  }
+}
+
+
 const DEFAULT_PWD_HASH = 'genmob2024'; // default password — hashed below on first use
 
 function getPwdHash() {
@@ -857,28 +977,46 @@ function hashPwd(s) {
   return 'h_' + Math.abs(h).toString(36) + '_' + s.length;
 }
 
+// ── Digicode éditeur ──
+let edPinBuffer = '';
+
 function openEditor() {
-  document.getElementById('pwdInput').value = '';
-  document.getElementById('pwdError').textContent = '';
+  edPinBuffer = '';
+  updateEdPinDots();
+  document.getElementById('edPinError').textContent = '';
   document.getElementById('pwdOverlay').classList.add('show');
-  setTimeout(() => document.getElementById('pwdInput').focus(), 80);
 }
 
 function closePwdModal() {
   document.getElementById('pwdOverlay').classList.remove('show');
+  edPinBuffer = '';
+  updateEdPinDots();
 }
 
-function togglePwdVisibility() {
-  const inp = document.getElementById('pwdInput');
-  const btn = document.getElementById('pwdToggle');
-  if (inp.type === 'password') { inp.type = 'text'; btn.textContent = '🙈'; }
-  else { inp.type = 'password'; btn.textContent = '👁'; }
+function edPinPress(d) {
+  if (edPinBuffer.length >= 6) return;
+  edPinBuffer += d;
+  updateEdPinDots();
+  if (edPinBuffer.length === 6) setTimeout(checkEdPin, 120);
 }
 
-function checkPassword() {
-  const val = document.getElementById('pwdInput').value;
+function edPinDel() {
+  edPinBuffer = edPinBuffer.slice(0, -1);
+  updateEdPinDots();
+  document.getElementById('edPinError').textContent = '';
+}
+
+function updateEdPinDots() {
+  for (let i = 0; i < 6; i++) {
+    const dot = document.getElementById('epd' + i);
+    dot.classList.toggle('filled', i < edPinBuffer.length);
+    dot.classList.remove('error');
+  }
+}
+
+function checkEdPin() {
+  const val = edPinBuffer;
   const stored = getPwdHash();
-  // Support both hashed and legacy plain comparison
   const match = (stored === DEFAULT_PWD_HASH && val === DEFAULT_PWD_HASH) ||
                 (stored.startsWith('h_') && hashPwd(val) === stored) ||
                 (!stored.startsWith('h_') && val === stored);
@@ -887,12 +1025,20 @@ function checkPassword() {
     editorAnnexeId = currentAnnexeId || appData.annexes[0]?.id;
     renderEditor();
     document.getElementById('editorOverlay').classList.add('show');
+    edPinBuffer = '';
+    updateEdPinDots();
   } else {
-    const err = document.getElementById('pwdError');
-    err.textContent = 'Mot de passe incorrect.';
-    document.getElementById('pwdInput').value = '';
-    document.getElementById('pwdInput').focus();
-    setTimeout(() => { err.textContent = ''; }, 2500);
+    for (let i = 0; i < 6; i++) {
+      const dot = document.getElementById('epd' + i);
+      dot.classList.remove('filled');
+      dot.classList.add('error');
+    }
+    document.getElementById('edPinError').textContent = 'Code incorrect';
+    setTimeout(() => {
+      edPinBuffer = '';
+      updateEdPinDots();
+      document.getElementById('edPinError').textContent = '';
+    }, 900);
   }
 }
 
@@ -1192,21 +1338,36 @@ function showChangePwd() {
   document.getElementById('newPwd1').value = '';
   document.getElementById('newPwd2').value = '';
   document.getElementById('changePwdMsg').textContent = '';
+  document.getElementById('newPin1').value = '';
+  document.getElementById('newPin2').value = '';
+  document.getElementById('changePinMsg').textContent = '';
 }
 
 function hideChangePwd() {
   document.getElementById('changePwdPanel').style.display = 'none';
 }
 
+function confirmChangePin() {
+  const p1 = document.getElementById('newPin1').value;
+  const p2 = document.getElementById('newPin2').value;
+  const msg = document.getElementById('changePinMsg');
+  if (!/^\d{6}$/.test(p1)) { msg.style.color = 'var(--danger)'; msg.textContent = 'Exactement 6 chiffres requis.'; return; }
+  if (p1 !== p2) { msg.style.color = 'var(--danger)'; msg.textContent = 'Les codes ne correspondent pas.'; return; }
+  localStorage.setItem('genmob_app_pin', p1);
+  msg.style.color = 'var(--success)';
+  msg.textContent = '✓ Code accès mis à jour !';
+  setTimeout(() => { msg.textContent = ''; document.getElementById('newPin1').value=''; document.getElementById('newPin2').value=''; }, 1800);
+}
+
 function confirmChangePwd() {
   const p1 = document.getElementById('newPwd1').value;
   const p2 = document.getElementById('newPwd2').value;
   const msg = document.getElementById('changePwdMsg');
-  if (!p1 || p1.length < 4) { msg.style.color = 'var(--danger)'; msg.textContent = 'Minimum 4 caractères.'; return; }
-  if (p1 !== p2) { msg.style.color = 'var(--danger)'; msg.textContent = 'Les mots de passe ne correspondent pas.'; return; }
+  if (!/^\d{6}$/.test(p1)) { msg.style.color = 'var(--danger)'; msg.textContent = 'Exactement 6 chiffres requis.'; return; }
+  if (p1 !== p2) { msg.style.color = 'var(--danger)'; msg.textContent = 'Les codes ne correspondent pas.'; return; }
   localStorage.setItem('genmob_pwd', hashPwd(p1));
   msg.style.color = 'var(--success)';
-  msg.textContent = '✓ Mot de passe mis à jour !';
+  msg.textContent = '✓ Code éditeur mis à jour !';
   setTimeout(hideChangePwd, 1800);
 }
 
@@ -1266,7 +1427,6 @@ function handleImport(input) {
   reader.readAsText(file);
 }
 function exportFile() {
-  // Vider temporairement les conteneurs dynamiques pour un export propre
   const sidebar   = document.getElementById('sidebar');
   const mainEl    = document.getElementById('main');
   const edBody    = document.getElementById('editorBody');
@@ -1274,8 +1434,8 @@ function exportFile() {
   const pwdOv     = document.getElementById('pwdOverlay');
   const changePwd = document.getElementById('changePwdPanel');
   const overlay   = document.getElementById('overlay');
+  const appLogin  = document.getElementById('appLogin');
 
-  // Sauvegarder l'état
   const savedSidebar   = sidebar.innerHTML;
   const savedMain      = mainEl.innerHTML;
   const savedEdBody    = edBody ? edBody.innerHTML : '';
@@ -1292,6 +1452,8 @@ function exportFile() {
   if (pwdOv)     pwdOv.classList.remove('show');
   if (overlay)   overlay.classList.remove('vis');
   if (changePwd) changePwd.style.display = 'none';
+  // L'écran login doit être visible à l'ouverture du fichier exporté
+  if (appLogin)  appLogin.style.display = 'flex';
 
   // Capturer le HTML propre
   const source = document.documentElement.outerHTML;
@@ -1304,6 +1466,8 @@ function exportFile() {
   if (pwdOv     && pwdHadShow)    pwdOv.classList.add('show');
   if (overlay   && overlayHadVis) overlay.classList.add('vis');
   if (changePwd) changePwd.style.display = changePwdShown;
+  // Restaurer l'état login (caché car on est déjà connecté)
+  if (appLogin)  appLogin.style.display = 'none';
 
   // Injecter les données actuelles
   const marker = 'const DEFAULT_DATA = ';
