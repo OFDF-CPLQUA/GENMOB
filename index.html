@@ -528,7 +528,7 @@ mark { background: rgba(240,180,41,.3); border-radius: 2px; padding: 0 2px; colo
   <div class="editor-panel">
     <div class="editor-header">
       <h2>ÉDITEUR DE PROCÉDURES</h2>
-      <span id="edFileName" style="font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:1px;opacity:0.6;">GENMOB_260419-V02.html</span>
+      <span id="edFileName" style="font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:1px;opacity:0.6;">Version : GENMOB_260419-V??</span>
       <span id="edSaveIndicator" style="font-family:var(--mono);font-size:11px;color:var(--success);opacity:0;transition:opacity .4s;">✓ Enregistré</span>
       <button class="editor-close" onclick="closeEditor()">✕</button>
     </div>
@@ -975,10 +975,9 @@ let edPinBuffer = '';
 function getCurrentFileName() {
   const now = new Date();
   const dateShort = String(now.getFullYear()).slice(2) + String(now.getMonth()+1).padStart(2,'0') + String(now.getDate()).padStart(2,'0');
-  const versionKey = 'genmob_export_version_' + dateShort;
-  const version = parseInt(localStorage.getItem(versionKey) || '0');
-  if (version === 0) return 'GENMOB_' + dateShort + '-V??.html';
-  return 'GENMOB_' + dateShort + '-V' + String(version).padStart(2,'0') + '.html';
+  const version = appData.exportVersion || 0;
+  if (version === 0) return 'Version : GENMOB_' + dateShort + '-V??';
+  return 'Version : GENMOB_' + dateShort + '-V' + String(version).padStart(2,'0');
 }
 
 function updateEdFileName() {
@@ -1495,9 +1494,9 @@ function exportFile() {
   a.href = url;
   const now = new Date();
   const dateShort = String(now.getFullYear()).slice(2) + String(now.getMonth()+1).padStart(2,'0') + String(now.getDate()).padStart(2,'0');
-  const versionKey = 'genmob_export_version_' + dateShort;
-  const version = (parseInt(localStorage.getItem(versionKey) || '0')) + 1;
-  localStorage.setItem(versionKey, version);
+  const version = (appData.exportVersion || 0) + 1;
+  appData.exportVersion = version;
+  saveData();
   const versionStr = 'V' + String(version).padStart(2, '0');
   a.download = 'GENMOB_' + dateShort + '-' + versionStr + '.html';
   a.click();
