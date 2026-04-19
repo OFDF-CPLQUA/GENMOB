@@ -1,0 +1,350 @@
+<html lang="fr"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>GENMOB</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="GENMOB">
+<meta name="theme-color" content="#0d1117">
+<style>
+:root {
+  --bg: #0d1117; --surface: #161b22; --surface2: #21262d;
+  --border: #30363d; --text: #e6edf3; --muted: #8b949e;
+  --accent: #f0b429; --danger: #f85149; --success: #3fb950;
+  --mono: 'IBM Plex Mono', 'Courier New', monospace;
+  --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; touch-action: manipulation; }
+html, body { height: 100%; background: var(--bg); color: var(--text); font-family: var(--sans); }
+
+/* LOGIN */
+.login {
+  position: fixed; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  background: var(--bg);
+}
+.login-box {
+  display: flex; flex-direction: column; align-items: center; gap: 20px;
+  width: min(320px, 90vw); padding: 40px 28px;
+  background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+}
+.login-title { font-family: var(--mono); font-weight: 700; font-size: 26px; color: var(--accent); letter-spacing: 4px; }
+.login-sub   { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 3px; margin-top: -12px; }
+.pin-dots { display: flex; gap: 12px; justify-content: center; }
+.pin-dot { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--border); background: transparent; transition: all .15s; }
+.pin-dot.filled { background: var(--accent); border-color: var(--accent); }
+.pin-dot.error  { background: var(--danger); border-color: var(--danger); }
+.pin-error { font-family: var(--mono); font-size: 11px; color: var(--danger); min-height: 16px; letter-spacing: 1px; }
+.numpad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 220px; }
+.numpad-btn {
+  background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+  color: var(--text); font-family: var(--mono); font-size: 20px; font-weight: 600;
+  padding: 14px; cursor: pointer; transition: all .12s; text-align: center;
+}
+.numpad-btn:active { transform: scale(.94); }
+.numpad-btn.del { font-size: 16px; color: var(--muted); }
+
+/* EDITOR */
+.editor-overlay {
+  display: none; position: fixed; inset: 0; background: var(--bg);
+  flex-direction: column; z-index: 500;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.editor-overlay.show { display: flex; }
+.ed-header {
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 14px 20px; display: flex; align-items: center; gap: 12px;
+}
+.ed-header h2 { font-family: var(--mono); font-size: 14px; color: var(--accent); letter-spacing: 1px; flex: 1; }
+.ed-close { background: none; border: none; color: var(--muted); font-size: 18px; cursor: pointer; padding: 4px; }
+.ed-body { flex: 1; padding: 28px 24px; display: flex; flex-direction: column; gap: 20px; align-items: center; justify-content: center; }
+.ed-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 24px; width: 100%; max-width: 380px; }
+.ed-card h3 { font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: 2px; margin-bottom: 16px; }
+.ed-input {
+  width: 100%; background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 6px; color: var(--text); font-family: var(--mono);
+  font-size: 18px; padding: 10px 14px; outline: none; letter-spacing: 8px;
+  text-align: center;
+}
+.ed-input:focus { border-color: var(--accent); }
+.ed-msg { font-family: var(--mono); font-size: 11px; min-height: 16px; margin-top: 8px; text-align: center; }
+.ed-btn {
+  width: 100%; margin-top: 14px; padding: 12px;
+  background: var(--accent); border: none; border-radius: 8px;
+  color: #000; font-family: var(--mono); font-size: 13px;
+  font-weight: 700; letter-spacing: 2px; cursor: pointer;
+}
+.ed-btn.secondary {
+  background: var(--surface2); border: 1px solid var(--border);
+  color: var(--text); margin-top: 8px;
+}
+
+/* EDITOR DIGICODE */
+.ed-pin-overlay {
+  display: none; position: fixed; inset: 0; background: rgba(0,0,0,.7);
+  z-index: 600; align-items: center; justify-content: center;
+}
+.ed-pin-overlay.show { display: flex; }
+
+/* COPYRIGHT */
+.copyright {
+  position: fixed; bottom: calc(8px + env(safe-area-inset-bottom));
+  left: 0; right: 0; text-align: center;
+  font-family: var(--mono); font-size: 9px; color: #30363d;
+  letter-spacing: 1px; pointer-events: none;
+}
+</style>
+</head>
+<body>
+
+<!-- ── LOGIN ── -->
+<div class="login" id="loginScreen">
+  <div class="login-box">
+    <div class="login-title">GENMOB</div>
+    <div class="login-sub">GENESIS MOBILE</div>
+    <div class="pin-dots" id="pinDots">
+      <div class="pin-dot" id="pd0"></div>
+      <div class="pin-dot" id="pd1"></div>
+      <div class="pin-dot" id="pd2"></div>
+      <div class="pin-dot" id="pd3"></div>
+      <div class="pin-dot" id="pd4"></div>
+      <div class="pin-dot" id="pd5"></div>
+    </div>
+    <div class="pin-error" id="pinError"></div>
+    <div class="numpad">
+      <button class="numpad-btn" onclick="pinPress('1')">1</button>
+      <button class="numpad-btn" onclick="pinPress('2')">2</button>
+      <button class="numpad-btn" onclick="pinPress('3')">3</button>
+      <button class="numpad-btn" onclick="pinPress('4')">4</button>
+      <button class="numpad-btn" onclick="pinPress('5')">5</button>
+      <button class="numpad-btn" onclick="pinPress('6')">6</button>
+      <button class="numpad-btn" onclick="pinPress('7')">7</button>
+      <button class="numpad-btn" onclick="pinPress('8')">8</button>
+      <button class="numpad-btn" onclick="pinPress('9')">9</button>
+      <button class="numpad-btn" style="visibility:hidden;"></button>
+      <button class="numpad-btn" onclick="pinPress('0')">0</button>
+      <button class="numpad-btn del" onclick="pinDel()">⌫</button>
+    </div>
+    <button onclick="openEditorPin()" style="background:none;border:none;color:var(--muted);font-family:var(--mono);font-size:10px;cursor:pointer;letter-spacing:1px;margin-top:4px;">✏️ ÉDITEUR</button>
+  </div>
+</div>
+
+<!-- ── EDITOR PIN ── -->
+<div class="ed-pin-overlay" id="edPinOverlay">
+  <div class="login-box">
+    <div class="login-title" style="font-size:18px;">ÉDITEUR</div>
+    <div class="login-sub">CODE D'ACCÈS</div>
+    <div class="pin-dots" id="edPinDots">
+      <div class="pin-dot" id="epd0"></div>
+      <div class="pin-dot" id="epd1"></div>
+      <div class="pin-dot" id="epd2"></div>
+      <div class="pin-dot" id="epd3"></div>
+      <div class="pin-dot" id="epd4"></div>
+      <div class="pin-dot" id="epd5"></div>
+    </div>
+    <div class="pin-error" id="edPinError"></div>
+    <div class="numpad">
+      <button class="numpad-btn" onclick="edPinPress('1')">1</button>
+      <button class="numpad-btn" onclick="edPinPress('2')">2</button>
+      <button class="numpad-btn" onclick="edPinPress('3')">3</button>
+      <button class="numpad-btn" onclick="edPinPress('4')">4</button>
+      <button class="numpad-btn" onclick="edPinPress('5')">5</button>
+      <button class="numpad-btn" onclick="edPinPress('6')">6</button>
+      <button class="numpad-btn" onclick="edPinPress('7')">7</button>
+      <button class="numpad-btn" onclick="edPinPress('8')">8</button>
+      <button class="numpad-btn" onclick="edPinPress('9')">9</button>
+      <button class="numpad-btn" style="visibility:hidden;"></button>
+      <button class="numpad-btn" onclick="edPinPress('0')">0</button>
+      <button class="numpad-btn del" onclick="edPinDel()">⌫</button>
+    </div>
+    <button onclick="closeEditorPin()" style="background:none;border:none;color:var(--muted);font-family:var(--mono);font-size:11px;cursor:pointer;margin-top:4px;">Annuler</button>
+  </div>
+</div>
+
+<!-- ── EDITOR ── -->
+<div class="editor-overlay" id="editorOverlay">
+  <div class="ed-header">
+    <h2>ÉDITEUR — INDEX</h2>
+    <button class="ed-close" onclick="closeEditor()">✕</button>
+  </div>
+  <div class="ed-body">
+    <div class="ed-card">
+      <h3>CODE D'ACCÈS APP (6 CHIFFRES)</h3>
+      <input type="number" id="newPin1" class="ed-input" placeholder="······" maxlength="6">
+      <input type="number" id="newPin2" class="ed-input" placeholder="······" maxlength="6" style="margin-top:8px;">
+      <div class="ed-msg" id="pinMsg"></div>
+      <button class="ed-btn" onclick="saveNewPin()">CONFIRMER</button>
+    </div>
+    <div class="ed-card">
+      <h3>EXPORTER INDEX.HTML</h3>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:12px;">Génère un nouveau index.html avec le code d'accès mis à jour à uploader sur GitHub.</p>
+      <button class="ed-btn secondary" onclick="exportIndex()">📤 EXPORTER INDEX</button>
+    </div>
+  </div>
+</div>
+
+<div class="copyright">© 2026 Quinodoz Adrien — QuA95334</div>
+
+<script>
+// ── CODES ──
+const DEFAULT_PIN    = '123789';
+const DEFAULT_ED_PIN = '654321';
+
+function getPin()   { return localStorage.getItem('genmob_index_pin')    || DEFAULT_PIN; }
+function getEdPin() { return localStorage.getItem('genmob_index_ed_pin') || DEFAULT_ED_PIN; }
+
+// ── LOGIN PIN ──
+let pinBuffer = '';
+
+function pinPress(d) {
+  if (pinBuffer.length >= 6) return;
+  pinBuffer += d;
+  updateDots('pd', pinBuffer);
+  if (pinBuffer.length === 6) setTimeout(checkPin, 120);
+}
+function pinDel() {
+  pinBuffer = pinBuffer.slice(0, -1);
+  updateDots('pd', pinBuffer);
+  document.getElementById('pinError').textContent = '';
+}
+function updateDots(prefix, buf) {
+  for (let i = 0; i < 6; i++) {
+    const d = document.getElementById(prefix + i);
+    d.classList.toggle('filled', i < buf.length);
+    d.classList.remove('error');
+  }
+}
+function checkPin() {
+  if (pinBuffer === getPin()) {
+    // Marquer la session comme autorisée puis rediriger
+    sessionStorage.setItem('genmob_auth', '1');
+    window.location.href = 'app.html';
+  } else {
+    for (let i = 0; i < 6; i++) {
+      const d = document.getElementById('pd' + i);
+      d.classList.remove('filled');
+      d.classList.add('error');
+    }
+    document.getElementById('pinError').textContent = 'Code incorrect';
+    setTimeout(() => {
+      pinBuffer = '';
+      updateDots('pd', pinBuffer);
+      document.getElementById('pinError').textContent = '';
+    }, 900);
+  }
+}
+
+// ── EDITOR PIN ──
+let edPinBuffer = '';
+
+function openEditorPin() {
+  edPinBuffer = '';
+  updateDots('epd', edPinBuffer);
+  document.getElementById('edPinError').textContent = '';
+  document.getElementById('edPinOverlay').classList.add('show');
+}
+function closeEditorPin() {
+  document.getElementById('edPinOverlay').classList.remove('show');
+  edPinBuffer = '';
+  updateDots('epd', edPinBuffer);
+}
+function edPinPress(d) {
+  if (edPinBuffer.length >= 6) return;
+  edPinBuffer += d;
+  updateDots('epd', edPinBuffer);
+  if (edPinBuffer.length === 6) setTimeout(checkEdPin, 120);
+}
+function edPinDel() {
+  edPinBuffer = edPinBuffer.slice(0, -1);
+  updateDots('epd', edPinBuffer);
+  document.getElementById('edPinError').textContent = '';
+}
+function checkEdPin() {
+  if (edPinBuffer === getEdPin()) {
+    closeEditorPin();
+    openEditor();
+  } else {
+    for (let i = 0; i < 6; i++) {
+      const d = document.getElementById('epd' + i);
+      d.classList.remove('filled');
+      d.classList.add('error');
+    }
+    document.getElementById('edPinError').textContent = 'Code incorrect';
+    setTimeout(() => {
+      edPinBuffer = '';
+      updateDots('epd', edPinBuffer);
+      document.getElementById('edPinError').textContent = '';
+    }, 900);
+  }
+}
+
+// ── EDITOR ──
+function openEditor() {
+  document.getElementById('newPin1').value = '';
+  document.getElementById('newPin2').value = '';
+  document.getElementById('pinMsg').textContent = '';
+  document.getElementById('editorOverlay').classList.add('show');
+}
+function closeEditor() {
+  document.getElementById('editorOverlay').classList.remove('show');
+}
+function saveNewPin() {
+  const p1 = document.getElementById('newPin1').value;
+  const p2 = document.getElementById('newPin2').value;
+  const msg = document.getElementById('pinMsg');
+  if (!/^\d{6}$/.test(p1)) { msg.style.color = 'var(--danger)'; msg.textContent = 'Exactement 6 chiffres requis.'; return; }
+  if (p1 !== p2) { msg.style.color = 'var(--danger)'; msg.textContent = 'Les codes ne correspondent pas.'; return; }
+  localStorage.setItem('genmob_index_pin', p1);
+  msg.style.color = 'var(--success)';
+  msg.textContent = '✓ Code mis à jour — pensez à exporter !';
+}
+
+// ── EXPORT INDEX ──
+function exportIndex() {
+  const currentPin = localStorage.getItem('genmob_index_pin') || DEFAULT_PIN;
+  const source = document.documentElement.outerHTML;
+
+  // Remplacer le DEFAULT_PIN dans le source exporté
+  const exported = source.replace(
+    "const DEFAULT_PIN    = '" + DEFAULT_PIN + "';",
+    "const DEFAULT_PIN    = '" + currentPin + "';"
+  ).replace(
+    "const DEFAULT_PIN    = '" + currentPin + "';",
+    "const DEFAULT_PIN    = '" + currentPin + "';"
+  );
+
+  // Vider les champs avant export
+  const clean = exported
+    .replace(/value="[0-9]*"/g, 'value=""')
+    .replace(/class="pin-dot"/g, 'class="pin-dot"')
+    .replace(/class="editor-overlay"/g, 'class="editor-overlay"')
+    .replace(/class="ed-pin-overlay"/g, 'class="ed-pin-overlay"');
+
+  const blob = new Blob([clean], { type: 'text/html;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'index.html';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ── ANTI-ZOOM ──
+document.addEventListener('touchstart', function(e) {
+  if (e.touches.length > 1) e.preventDefault();
+}, { passive: false });
+let lastTap = 0;
+document.addEventListener('touchend', function(e) {
+  const tag = e.target.tagName;
+  if (tag === 'BUTTON' || tag === 'INPUT') return;
+  const now = Date.now();
+  if (now - lastTap < 300) e.preventDefault();
+  lastTap = now;
+}, { passive: false });
+</script>
+
+
+</body></html>
