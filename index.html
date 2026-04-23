@@ -1,4 +1,6 @@
-<html lang="fr"><head>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>GENMOB</title>
@@ -15,6 +17,12 @@
   --accent: #f0b429; --danger: #f85149; --success: #3fb950;
   --mono: 'IBM Plex Mono', 'Courier New', monospace;
   --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+}
+/* MODE CLAIR */
+body.light {
+  --bg: #f5f5f0; --surface: #ffffff; --surface2: #ebebeb;
+  --border: #d0d0c8; --text: #1a1a1a; --muted: #6b7280;
+  --accent: #c49000; --danger: #d63b35; --success: #2d9e3f;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; touch-action: manipulation; }
 html, body { height: 100%; background: var(--bg); color: var(--text); font-family: var(--sans); }
@@ -131,6 +139,7 @@ html, body { height: 100%; background: var(--bg); color: var(--text); font-famil
       <button class="numpad-btn del" onclick="pinDel()">⌫</button>
     </div>
     <button onclick="openEditorPin()" style="background:none;border:none;color:var(--muted);font-family:var(--mono);font-size:10px;cursor:pointer;letter-spacing:1px;margin-top:4px;">✏️ ÉDITEUR</button>
+    <button onclick="toggleTheme()" id="themeBtn" style="background:none;border:none;color:var(--muted);font-family:var(--mono);font-size:16px;cursor:pointer;margin-top:4px;">🌙</button>
   </div>
 </div>
 
@@ -177,7 +186,7 @@ html, body { height: 100%; background: var(--bg); color: var(--text); font-famil
       <h3>CODE D'ACCÈS APP (6 CHIFFRES)</h3>
       <input type="number" id="newPin1" class="ed-input" placeholder="······" maxlength="6">
       <input type="number" id="newPin2" class="ed-input" placeholder="······" maxlength="6" style="margin-top:8px;">
-      <div class="ed-msg" id="pinMsg" style="color: var(--success);">✓ Code mis à jour — pensez à exporter !</div>
+      <div class="ed-msg" id="pinMsg"></div>
       <button class="ed-btn" onclick="saveNewPin()">CONFIRMER</button>
     </div>
     <div class="ed-card">
@@ -321,9 +330,9 @@ function exportIndex() {
   // Vider les champs avant export
   const clean = exported
     .replace(/value="[0-9]*"/g, 'value=""')
-    .replace(/class="pin-dot"/g, 'class="pin-dot"')
-    .replace(/class="editor-overlay"/g, 'class="editor-overlay"')
-    .replace(/class="ed-pin-overlay"/g, 'class="ed-pin-overlay"');
+    .replace(/class="pin-dot filled"/g, 'class="pin-dot"')
+    .replace(/class="editor-overlay show"/g, 'class="editor-overlay"')
+    .replace(/class="ed-pin-overlay show"/g, 'class="ed-pin-overlay"');
 
   const blob = new Blob([clean], { type: 'text/html;charset=utf-8' });
   const url = URL.createObjectURL(blob);
@@ -333,6 +342,30 @@ function exportIndex() {
   a.click();
   URL.revokeObjectURL(url);
 }
+
+// ── THEME CLAIR / SOMBRE ──
+function applyTheme(mode) {
+  if (mode === 'light') {
+    document.body.classList.add('light');
+    const btn = document.getElementById('themeBtn');
+    if (btn) btn.textContent = '☀️';
+  } else {
+    document.body.classList.remove('light');
+    const btn = document.getElementById('themeBtn');
+    if (btn) btn.textContent = '🌙';
+  }
+}
+function toggleTheme() {
+  const isLight = document.body.classList.contains('light');
+  const newMode = isLight ? 'dark' : 'light';
+  localStorage.setItem('genmob_theme', newMode);
+  applyTheme(newMode);
+}
+(function() {
+  const saved = localStorage.getItem('genmob_theme');
+  const preferred = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  applyTheme(saved || preferred);
+})();
 
 // ── ANTI-ZOOM ──
 document.addEventListener('touchstart', function(e) {
@@ -347,6 +380,5 @@ document.addEventListener('touchend', function(e) {
   lastTap = now;
 }, { passive: false });
 </script>
-
-
-</body></html>
+</body>
+</html>
