@@ -138,7 +138,7 @@ html, body { height: 100%; background: var(--bg); color: var(--text); font-famil
       <button class="numpad-btn" onclick="pinPress('0')">0</button>
       <button class="numpad-btn del" onclick="pinDel()">⌫</button>
     </div>
-    <button onclick="openEditorPin()" style="background:none;border:none;color:var(--muted);font-family:var(--mono);font-size:10px;cursor:pointer;letter-spacing:1px;margin-top:4px;">✏️ ÉDITEUR</button>
+    <button id="editorBtn" onclick="openEditorPin()" style="background:none;border:none;color:var(--muted);font-family:var(--mono);font-size:10px;cursor:pointer;letter-spacing:1px;margin-top:4px;">✏️ ÉDITEUR</button>
     <button onclick="toggleTheme()" id="themeBtn" style="background:none;border:none;color:var(--muted);font-family:var(--mono);font-size:16px;cursor:pointer;margin-top:4px;">🌙</button>
   </div>
 </div>
@@ -365,6 +365,17 @@ function toggleTheme() {
   const saved = localStorage.getItem('genmob_theme');
   const preferred = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
   applyTheme(saved || preferred);
+})();
+
+// Cacher le bouton éditeur sur iPhone et iPad
+(function() {
+  const ua = navigator.userAgent || navigator.vendor || window.opera;
+  const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  const isIPadOS = navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
+  if (isIOS || isIPadOS) {
+    const btn = document.getElementById('editorBtn');
+    if (btn) btn.style.display = 'none';
+  }
 })();
 
 // ── ANTI-ZOOM ──
