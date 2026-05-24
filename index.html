@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
+<html lang="fr"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>GENMOB</title>
@@ -331,9 +329,9 @@ function exportIndex() {
   // Vider les champs avant export
   const clean = exported
     .replace(/value="[0-9]*"/g, 'value=""')
-    .replace(/class="pin-dot filled"/g, 'class="pin-dot"')
-    .replace(/class="editor-overlay show"/g, 'class="editor-overlay"')
-    .replace(/class="ed-pin-overlay show"/g, 'class="ed-pin-overlay"');
+    .replace(/class="pin-dot"/g, 'class="pin-dot"')
+    .replace(/class="editor-overlay"/g, 'class="editor-overlay"')
+    .replace(/class="ed-pin-overlay"/g, 'class="ed-pin-overlay"');
 
   const blob = new Blob([clean], { type: 'text/html;charset=utf-8' });
   const url = URL.createObjectURL(blob);
@@ -379,6 +377,15 @@ function toggleTheme() {
   }
 })();
 
+// ── RESET DIGICODE AU RETOUR NAVIGATEUR ──
+window.addEventListener('pageshow', function(e) {
+  if (e.persisted) {
+    pinBuffer = '';
+    updateDots('pd', pinBuffer);
+    document.getElementById('pinError').textContent = '';
+  }
+});
+
 // ── ANTI-ZOOM ──
 document.addEventListener('touchstart', function(e) {
   if (e.touches.length > 1) e.preventDefault();
@@ -392,5 +399,6 @@ document.addEventListener('touchend', function(e) {
   lastTap = now;
 }, { passive: false });
 </script>
-</body>
-</html>
+
+
+</body></html>
