@@ -174,8 +174,8 @@ header::before {
 .btn.active { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
 .btn.danger { color: var(--danger); }
 .btn.danger:hover { border-color: var(--danger); background: rgba(248,81,73,.1); }
-.menu-toggle { background: none; border: none; color: var(--text); font-size: 20px; cursor: pointer; padding: 4px; display: flex; align-items: center; justify-content: center; }
-.menu-toggle svg { width: 20px; height: 20px; display: block; }
+.menu-toggle { background: none; border: none; color: var(--text); font-size: 20px; cursor: pointer; padding: 6px; display: flex; align-items: center; justify-content: center; }
+.menu-toggle svg { width: 26px; height: 26px; display: block; }
 
 /* OVERLAY — visible sur tous les écrans */
 .overlay { display: block; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,.5); z-index: 140; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .5s; }
@@ -617,7 +617,7 @@ body:not(.light) .btn-save { color: #000; }
 <body class="light">
 
 <header>
-  <button class="menu-toggle" id="menuToggleBtn" onclick="toggleMenu()"><span id="menuToggleIcon">☰</span></button>
+  <button class="menu-toggle" id="menuToggleBtn" onclick="toggleMenu()"><span id="menuToggleIcon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></span></button>
   <div class="header-center">
     <div class="ch-cross" id="chCrossSlot" title="Logo temporaire — blason, en attente d'autorisation officielle">
       <svg viewBox="0 0 32 34" xmlns="http://www.w3.org/2000/svg">
@@ -647,8 +647,8 @@ body:not(.light) .btn-save { color: #000; }
         <span class="lbl">Se déconnecter</span>
       </button>
     </div>
-    <button class="utility-toggle" id="utilityToggle" onclick="toggleUtilityPanel()" title="Menu">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    <button class="utility-toggle" id="utilityToggle" onclick="toggleUtilityPanel()" title="Options">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06A1.65 1.65 0 005 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 5a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06A1.65 1.65 0 0019 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09A1.65 1.65 0 0019.4 15z"/></svg>
     </button>
   </div>
 </header>
@@ -1615,7 +1615,7 @@ function goSearch(annId, pathStr) {
 let sidebarPinned = false;
 let hoverSuppressedUntil = 0;
 let sidebarHoverTimer = null;
-const SVG_MENU_HAMBURGER = '☰';
+const SVG_MENU_HAMBURGER = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
 function setMenuToggleIcon(isOpen) {
   const el = document.getElementById('menuToggleIcon');
   if (el) el.innerHTML = isOpen ? SVG_CLOSE_X : SVG_MENU_HAMBURGER;
@@ -3285,13 +3285,13 @@ function logout() {
 }
 
 // ── MENU UTILITAIRE MOBILE (façon Raporta) ──
-const SVG_MENU_LINES = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+const SVG_GEAR = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06A1.65 1.65 0 005 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 5a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06A1.65 1.65 0 0019 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09A1.65 1.65 0 0019.4 15z"/></svg>';
 const SVG_CLOSE_X = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>';
 function toggleUtilityPanel() {
   const panel = document.getElementById('headerActions');
   const btn = document.getElementById('utilityToggle');
   const open = panel.classList.toggle('open');
-  btn.innerHTML = open ? SVG_CLOSE_X : SVG_MENU_LINES;
+  btn.innerHTML = open ? SVG_CLOSE_X : SVG_GEAR;
 }
 // Appliquer le thème au chargement — Confédération (clair) par défaut, sombre uniquement sur choix explicite
 (function() {
