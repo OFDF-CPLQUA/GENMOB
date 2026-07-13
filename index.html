@@ -34,11 +34,9 @@ header {
   padding: 0 16px; height: 64px; display: flex; align-items: center; gap: 10px;
   position: fixed; top: env(safe-area-inset-top); left: 0; right: 0; z-index: 200;
 }
-.ch-cross { width: 30px; height: 32px; flex-shrink: 0; }
-.ch-cross svg { width: 30px; height: 32px; display: block; }
-header .logo { font-family: var(--sans); font-weight: 600; font-size: 19px; color: var(--text); }
-header .logo-sep { color: var(--border); font-weight: 300; font-size: 18px; margin: 0 2px; }
-header .app-subtitle { font-family: var(--sans); font-size: 13px; color: var(--muted); }
+.ch-cross { width: 40px; height: 40px; flex-shrink: 0; }
+.ch-cross svg { width: 100%; height: 100%; display: block; shape-rendering: crispEdges; }
+header .logo { font-family: var(--sans); font-weight: 700; font-size: 20px; letter-spacing: .5px; color: var(--text); text-transform: uppercase; }
 .header-right { margin-left: auto; display: flex; gap: 6px; }
 .icon-btn { width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; color: var(--text); cursor: pointer; background: none; border: none; border-radius: 50%; padding: 0; flex-shrink: 0; transition: background .12s; }
 .icon-btn:hover { background: var(--bg); }
@@ -195,15 +193,13 @@ header .app-subtitle { font-family: var(--sans); font-size: 13px; color: var(--m
 
 <header>
   <div class="ch-cross">
-    <svg viewBox="0 0 32 34" xmlns="http://www.w3.org/2000/svg">
-      <path d="M16 1 L28.5 5.2 L28.5 14.5 C28.5 23.5 22.5 29.5 16 33 C9.5 29.5 3.5 23.5 3.5 14.5 L3.5 5.2 Z" fill="#DC0018"></path>
-      <rect x="13.3" y="8.5" width="5.4" height="17" fill="#fff"></rect>
-      <rect x="7.5" y="14" width="17" height="5.4" fill="#fff"></rect>
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="32" height="32" rx="6" fill="#DC0018"></rect>
+      <rect x="13" y="6" width="6" height="20" fill="#fff"></rect>
+      <rect x="6" y="13" width="20" height="6" fill="#fff"></rect>
     </svg>
   </div>
   <span class="logo">Genesis Mobile</span>
-  <span class="logo-sep">///</span>
-  <span class="app-subtitle">Accords cantonaux</span>
   <div class="header-right">
     <button class="icon-btn" id="themeBtn" onclick="toggleTheme()" title="Mode clair/sombre"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg></button>
     <button class="btn-outline" onclick="refreshAndReset()" title="Rafraîchir">
@@ -345,7 +341,7 @@ header .app-subtitle { font-family: var(--sans); font-size: 13px; color: var(--m
           <input type="file" accept="image/*" style="display:none;" onchange="uploadCrest(0, this)">
         </label>
         <div class="ced-fields">
-          <input class="ced-input" value="Canton de Genève" onchange="updateCantonField(0,'name',this.value)" placeholder="Nom affiché (ex: Canton de Vaud)">
+          <input class="ced-input" value="Genève" onchange="updateCantonField(0,'name',this.value)" placeholder="Nom affiché (ex: Canton de Vaud)">
           <div class="ced-row-line2">
             <input class="ced-input" style="width:70px;flex-shrink:0;" value="GE" maxlength="4" onchange="updateCantonField(0,'code',this.value.toUpperCase())" placeholder="Code">
             <input class="ced-input" value="app_GE.html" onchange="updateCantonField(0,'file',this.value)" placeholder="app_XX.html">
@@ -372,7 +368,7 @@ header .app-subtitle { font-family: var(--sans); font-size: 13px; color: var(--m
           <input type="file" accept="image/*" style="display:none;" onchange="uploadCrest(1, this)">
         </label>
         <div class="ced-fields">
-          <input class="ced-input" value="Canton de Genève / Aéroport" onchange="updateCantonField(1,'name',this.value)" placeholder="Nom affiché (ex: Canton de Vaud)">
+          <input class="ced-input" value="Genève - Aéroport" onchange="updateCantonField(1,'name',this.value)" placeholder="Nom affiché (ex: Canton de Vaud)">
           <div class="ced-row-line2">
             <input class="ced-input" style="width:70px;flex-shrink:0;" value="GA" maxlength="4" onchange="updateCantonField(1,'code',this.value.toUpperCase())" placeholder="Code">
             <input class="ced-input" value="app_GA.html" onchange="updateCantonField(1,'file',this.value)" placeholder="app_XX.html">
@@ -399,7 +395,7 @@ header .app-subtitle { font-family: var(--sans); font-size: 13px; color: var(--m
           <input type="file" accept="image/*" style="display:none;" onchange="uploadCrest(2, this)">
         </label>
         <div class="ced-fields">
-          <input class="ced-input" value="Canton de Vaud" onchange="updateCantonField(2,'name',this.value)" placeholder="Nom affiché (ex: Canton de Vaud)">
+          <input class="ced-input" value="Vaud" onchange="updateCantonField(2,'name',this.value)" placeholder="Nom affiché (ex: Canton de Vaud)">
           <div class="ced-row-line2">
             <input class="ced-input" style="width:70px;flex-shrink:0;" value="VD" maxlength="4" onchange="updateCantonField(2,'code',this.value.toUpperCase())" placeholder="Code">
             <input class="ced-input" value="app_VD.html" onchange="updateCantonField(2,'file',this.value)" placeholder="app_XX.html">
@@ -426,7 +422,7 @@ header .app-subtitle { font-family: var(--sans); font-size: 13px; color: var(--m
           <input type="file" accept="image/*" style="display:none;" onchange="uploadCrest(3, this)">
         </label>
         <div class="ced-fields">
-          <input class="ced-input" value="Canton du Valais" onchange="updateCantonField(3,'name',this.value)" placeholder="Nom affiché (ex: Canton de Vaud)">
+          <input class="ced-input" value="Valais" onchange="updateCantonField(3,'name',this.value)" placeholder="Nom affiché (ex: Canton de Vaud)">
           <div class="ced-row-line2">
             <input class="ced-input" style="width:70px;flex-shrink:0;" value="VS" maxlength="4" onchange="updateCantonField(3,'code',this.value.toUpperCase())" placeholder="Code">
             <input class="ced-input" value="app_VS.html" onchange="updateCantonField(3,'file',this.value)" placeholder="app_XX.html">
@@ -453,7 +449,7 @@ header .app-subtitle { font-family: var(--sans); font-size: 13px; color: var(--m
           <input type="file" accept="image/*" style="display:none;" onchange="uploadCrest(4, this)">
         </label>
         <div class="ced-fields">
-          <input class="ced-input" value="Canton de Neuchâtel" onchange="updateCantonField(4,'name',this.value)" placeholder="Nom affiché (ex: Canton de Vaud)">
+          <input class="ced-input" value="Neuchâtel" onchange="updateCantonField(4,'name',this.value)" placeholder="Nom affiché (ex: Canton de Vaud)">
           <div class="ced-row-line2">
             <input class="ced-input" style="width:70px;flex-shrink:0;" value="NE" maxlength="4" onchange="updateCantonField(4,'code',this.value.toUpperCase())" placeholder="Code">
             <input class="ced-input" value="app_NE.html" onchange="updateCantonField(4,'file',this.value)" placeholder="app_XX.html">
@@ -480,7 +476,7 @@ header .app-subtitle { font-family: var(--sans); font-size: 13px; color: var(--m
           <input type="file" accept="image/*" style="display:none;" onchange="uploadCrest(5, this)">
         </label>
         <div class="ced-fields">
-          <input class="ced-input" value="Canton du Jura" onchange="updateCantonField(5,'name',this.value)" placeholder="Nom affiché (ex: Canton de Vaud)">
+          <input class="ced-input" value="Jura" onchange="updateCantonField(5,'name',this.value)" placeholder="Nom affiché (ex: Canton de Vaud)">
           <div class="ced-row-line2">
             <input class="ced-input" style="width:70px;flex-shrink:0;" value="JU" maxlength="4" onchange="updateCantonField(5,'code',this.value.toUpperCase())" placeholder="Code">
             <input class="ced-input" value="app_JU.html" onchange="updateCantonField(5,'file',this.value)" placeholder="app_XX.html">
