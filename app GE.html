@@ -1147,16 +1147,17 @@ function renderSidebar() {
   html += `<button class="nav-item" onclick="goToLastAnnexe()">${NAV_ICONS.derniere}<span>Dernière consultée</span></button>`;
   html += '</div>';
 
-  // ── Compléments Procédures (visibles uniquement en consultant une annexe, contextuelles) ──
+  // ── Compléments Procédures (toujours visibles ; navigation contextuelle si on est
+  //    dans une procédure spécifique, sinon affichage global de l'onglet) ──
   const currentAnn = appData.annexes.find(a => a.id === currentAnnexeId);
   const inRealAnnexe = currentAnn && currentAnn.cat !== 'REF';
-  if (refItems.length && inRealAnnexe) {
+  if (refItems.length) {
     html += '<div class="cat-group">';
     html += '<div class="nav-section-label">Compléments Procédures</div>';
     refItems.forEach(ann => {
       const active = currentAnnexeId === ann.id ? ' active' : '';
       const icon = REF_ICON_MAP[ann.num] || NAV_ICONS.info;
-      const sc = (currentAnn.shortcuts || []).find(s => s.label === ann.titre && s.annexeId);
+      const sc = inRealAnnexe ? (currentAnn.shortcuts || []).find(s => s.label === ann.titre && s.annexeId) : null;
       const onclick = sc
         ? `goShortcut('${sc.annexeId}', ${JSON.stringify(sc.navPath || [])})`
         : `selectAnnexe('${ann.id}')`;
