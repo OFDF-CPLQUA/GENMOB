@@ -144,20 +144,24 @@ header::before {
 @media (max-width: 640px) {
   .header-actions { display: none; }
   .header-actions.open {
-    display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: center;
-    position: fixed; top: calc(64px + env(safe-area-inset-top)); left: 0; right: 0;
+    display: flex; flex-wrap: nowrap; gap: 10px; align-items: center; justify-content: center;
+    /* Ancrée au header (position: fixed) via position:absolute + top:100% :
+       elle colle toujours exactement au bas réel du header, quel que soit
+       l'encoche/safe-area ou le comportement de la barre d'adresse mobile. */
+    position: absolute; top: 100%; left: 0; right: 0;
     background: var(--surface);
     border-bottom: 1px solid var(--border);
     border-radius: 0 0 20px 20px;
-    padding: 20px 24px calc(18px + env(safe-area-inset-bottom));
+    padding: 16px 14px calc(16px + env(safe-area-inset-bottom));
     z-index: 199;
     box-shadow: 0 12px 28px rgba(0,0,0,.14);
     animation: panelSlideDown .18s ease;
+    overflow-x: auto;
   }
   @keyframes panelSlideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
   .header-actions.open .btn-outline,
   .header-actions.open .icon-btn {
-    width: 46px; height: 46px; border-radius: 50%; padding: 0;
+    width: 44px; height: 44px; border-radius: 50%; padding: 0; flex-shrink: 0;
     border: 1px solid var(--border); background: var(--surface2);
   }
   .header-actions.open .btn-outline svg,
@@ -165,8 +169,8 @@ header::before {
   .header-actions.open .btn-outline span.lbl { display: none; }
   .utility-toggle { display: flex; }
   .panel-close-btn {
-    display: flex; align-items: center; justify-content: center;
-    width: 46px; height: 46px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    width: 44px; height: 44px; border-radius: 50%;
     border: 1px solid rgba(220,0,24,.25); background: rgba(220,0,24,.08);
     color: var(--accent); cursor: pointer;
   }
